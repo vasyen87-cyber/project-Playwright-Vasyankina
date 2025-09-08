@@ -1,4 +1,4 @@
-import {th} from "@faker-js/faker";
+import {faker, th} from "@faker-js/faker";
 import {expect} from "@playwright/test";
 
 export class ArticlePage {
@@ -22,6 +22,7 @@ export class ArticlePage {
         this.linkProfile = page.getByRole('link', { name: ' Profile' });
         this.chooseFavorite = page.getByRole('button', { name: ' ( 0 )' });
         this.favoriteTab = page.getByRole('link', { name: 'Favorited Articles' });
+        this.myTab = page.getByRole('link', { name: 'My Articles' });
     }
     // бизнесовые действия со страницой
     async createNewArticle(articleName) {
@@ -35,6 +36,7 @@ export class ArticlePage {
         await this.enterTags.click();
         await this.enterTags.fill('Артикль123');
         await this.articlePublish.click();
+
     }
 
     async updateArticle(articleName) {
@@ -51,16 +53,15 @@ export class ArticlePage {
         await this.postComment.click();
     }
 
-    async favoriteArticle() {
+    async goToMyTab() {
         await this.userProfile.click();
         await this.linkProfile.click();
-        await this.chooseFavorite.click();
+        await this.myTab.click();
     }
 
     async goToFavoriteTab() {
         await this.userProfile.click();
         await this.linkProfile.click();
-        await this.chooseFavorite.click();
         await this.favoriteTab.click();
     }
 }

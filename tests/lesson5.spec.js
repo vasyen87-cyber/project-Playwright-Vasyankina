@@ -79,13 +79,13 @@ test.describe('Регистрация', () => {
     await articlePage.newPostComment();
   });
 
-  test('Click favorite article', async ({page}) => {
+  test('My tab', async ({page}) => {
     const user = {
       name: faker.person.fullName(),
       email: faker.internet.email(),
       password: faker.internet.password(),
     };
-    const articleName = faker.word.words();
+    const articleName = faker.finance.bic();
 
     const mainPage = new MainPage(page);
     const registerPage = new RegisterPage(page);
@@ -93,8 +93,7 @@ test.describe('Регистрация', () => {
 
     await mainPage.gotoRegister();
     await registerPage.register(user);
-    await articlePage.createNewArticle(articleName);
-    await articlePage.favoriteArticle()
+    await articlePage.goToMyTab();
   });
 
   test('Favorite tab', async ({page}) => {
@@ -111,7 +110,6 @@ test.describe('Регистрация', () => {
 
     await mainPage.gotoRegister();
     await registerPage.register(user);
-    await articlePage.createNewArticle(articleName);
     await articlePage.goToFavoriteTab()
   });
 });
