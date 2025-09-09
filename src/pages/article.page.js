@@ -1,6 +1,3 @@
-import {faker, th} from "@faker-js/faker";
-import {expect} from "@playwright/test";
-
 export class ArticlePage {
     constructor(page) {
         // техническое описание страницы
@@ -11,6 +8,7 @@ export class ArticlePage {
         this.articleWrite = page.getByRole('textbox', { name: 'Write your article (in' });
         this.enterTags = page.getByRole('textbox', { name: 'Enter tags' });
         this.articlePublish = page.getByText('Publish Article');
+        this.articleCheck = page.getByRole('main');
         //update
         this.editArticle = page.getByRole('link', { name: ' Edit Article' });
         this.articleUpdate = page.getByRole('button', { name: 'Update Article' });
@@ -20,7 +18,6 @@ export class ArticlePage {
         //favorite
         this.userProfile = page.locator('.user-pic');
         this.linkProfile = page.getByRole('link', { name: ' Profile' });
-        this.chooseFavorite = page.getByRole('button', { name: ' ( 0 )' });
         this.favoriteTab = page.getByRole('link', { name: 'Favorited Articles' });
         this.myTab = page.getByRole('link', { name: 'My Articles' });
     }

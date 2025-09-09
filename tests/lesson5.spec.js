@@ -1,8 +1,6 @@
-import { test} from '@playwright/test';
+import { test, expect } from '@playwright/test';
 import { faker } from '@faker-js/faker';
-import { MainPage } from '../src/pages/main.page';
-import { RegisterPage } from '../src/pages/register.page';
-import { ArticlePage } from '../src/pages/article.page';
+import { MainPage, RegisterPage, ArticlePage} from '../src/pages/index';
 
 const URL = 'https://realworld.qa.guru/';
 
@@ -23,6 +21,9 @@ test.describe('Регистрация', () => {
 
     await mainPage.gotoRegister();
     await registerPage.register(user);
+    await expect(registerPage.profileNameField).toContainText(
+        user.name,
+    );
   });
 
   test('New article', async ({page}) => {
@@ -40,6 +41,7 @@ test.describe('Регистрация', () => {
     await mainPage.gotoRegister();
     await registerPage.register(user);
     await articlePage.createNewArticle(articleName);
+    await expect(articlePage.articleCheck).toContainText(articleName);
   });
 
   test('Update article', async ({page}) => {
@@ -58,6 +60,7 @@ test.describe('Регистрация', () => {
     await registerPage.register(user);
     await articlePage.createNewArticle(articleName);
     await articlePage.updateArticle(articleName);
+    await expect(articlePage.articleCheck).toContainText(articleName);
   });
 
 
@@ -77,6 +80,7 @@ test.describe('Регистрация', () => {
     await registerPage.register(user);
     await articlePage.createNewArticle(articleName);
     await articlePage.newPostComment();
+    await expect(articlePage.articleCheck).toContainText('новый коммент');
   });
 
   test('My tab', async ({page}) => {
@@ -94,6 +98,7 @@ test.describe('Регистрация', () => {
     await mainPage.gotoRegister();
     await registerPage.register(user);
     await articlePage.goToMyTab();
+    await expect(articlePage.myTab).toBeVisible();
   });
 
   test('Favorite tab', async ({page}) => {
@@ -111,6 +116,7 @@ test.describe('Регистрация', () => {
     await mainPage.gotoRegister();
     await registerPage.register(user);
     await articlePage.goToFavoriteTab()
+    await expect(articlePage.favoriteTab).toBeVisible();
   });
 });
 
