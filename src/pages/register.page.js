@@ -6,7 +6,7 @@ export class RegisterPage {
         this.nameInput = page.getByRole('textbox', { name: 'Your Name' });
         this.passwordInput = page.getByRole('textbox', { name: 'Password' });
         this.signupButton = page.getByRole('button', { name: 'Sign Up' });
-        this.emailErrorText = page.getByText('Email already exists.. try logging in');
+        this.profileNameField = page.getByRole('navigation');
     }
     // бизнесовые действия со страницой
     async register(user) {
