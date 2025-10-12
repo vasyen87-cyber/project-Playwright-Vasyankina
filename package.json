@@ -6,7 +6,8 @@
   "scripts": {
     "test": "npx playwright test",
     "testUI": "npx playwright test --ui",
-    "report": "npm run report"
+    "report": "npm run report",
+    "allureFile": "npx allure awesome ./allure-results --single-file"
   },
   "repository": {
     "type": "git",
